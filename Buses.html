@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+    Buses
+    </title>
+</head>
+<body>
+
+    <form name= "add" action="added.php" method="POST">
+
+<fieldset>
+<legend >Register </legend>
+Registration Number:<input type ="text" name="number" label="Registration number" /><br><br>
+Driver:<input type ="text" name="driver" label="Driver" /><br><br>
+Seats:<input type="text" name="seats" label="Seats" /><br><br>
+
+<input type="submit" value="submit" />
+<input type="reset" value="reset"  />
+<button id="delete" value="delete" type="button" style="vertical-align:middle"></button>
+<button id="edit" type="button" style="vertical-align:middle" ></button>
+<script type= "text/javascript">
+
+
+document.getElementById("delete").onclick=function(){
+location.href="deletebuses.html";
+};
+document.getElementById("edit").onclick=function(){
+location.href="editbuses.html";
+};
+  </script>
+</fieldset>
+</form>
+    </body>
+</html>
+
+
