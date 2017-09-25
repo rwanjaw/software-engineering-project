@@ -1,0 +1,106 @@
+body{ 
+  display: -webkit-box;
+  -webkit-box-pack:center;
+  background-size: cover;
+  background-color: #4CAF50;
+
+  color: #777;
+}
+*{
+  margin: 0px;
+  padding: 0px;
+}
+header,section,nav,aside,footer,article{
+  display: block;
+}
+h1{
+  font-family: bold 20px Tahoma;
+}
+h2{
+  font-family: bold 15px Tahoma;
+}
+form{
+	padding-top: 7px;
+}
+.myform{
+  display: -webkit-box;
+  -webkit-box-orient:horizontal;
+  -webkit-box-flex:1;
+}
+#body_wrap{
+  padding: 30px;
+  background-color: #F9F9F9;
+  -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  width: 60%;
+  height: 75%;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  min-width: 200px;
+  max-width: 520px;
+  min-height: 300px;
+}
+#txt{
+  width: 100%;
+  height: 25px;
+  padding-left: 10px;
+}
+#txt1{
+  width: 100%;
+  padding: 5px;
+}
+#btn{
+  height: 30px;
+  width: 100%;
+    border: none;
+    background: #4CAF50;
+    color: #FFF;
+    padding: 10px;
+    font-size: 15px;  
+}
+
+#error{
+  color: red;  
+	text-align: center;
+}
+#errorA{
+	background-color: #4CAF50;
+  color: #FFF;
+	display: -webkit-box;  
+	border-top: 5px solid black;
+	-webkit-border-radius: 2px;
+	-webkit-box-shadow: rgb(110,110,110) 10px 10px 10px;
+	margin-bottom: 25px;
+	height: 25px;
+	padding: 5px;
+}
+#logout{
+	float: right;
+	display: -webkit-box;
+  border: 1px solid	#4CAF50;
+ 	height: 25px;
+	padding: 10px;	
+  background: #FFF;
+}
+#logout a{
+  color: #4CAF50;
+  text-decoration: none;
+}
+a{
+  color: #4CAF50;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 2px;
+}
+th {
+    text-align: left;
+}
+td{
+	text-align: center;
+}
+table{
+	margin-bottom: 20px;
+}
