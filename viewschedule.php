@@ -1,5 +1,11 @@
 <?php
 include("connection.php");
+
+   $user_check = $_SESSION['login_user'];   
+   $ses_sql = mysqli_query($conn,"select username from admin where username = '$user_check' ");   
+   $row = mysqli_fetch_array($ses_sql,MYSQLI_ASSOC);   
+   $login_session = $row['username'];
+
 $error="";
 
 $sql = "SELECT * FROM `schedule`";
@@ -60,11 +66,19 @@ $result = mysqli_query($conn, $sql);
 				    </tbody>
 				  </table>
 				</div> 
-			</form>	
-			<p>To add schedule, click <a href="schedule.php">here</a></p>
-			<div id="logout">
-				<h2><a href = "welcome.php">Exit</a></h2>
-			</div>
+			</form>
+
+			<?php if(isset($_SESSION['login_user'])){ ?>
+				<p>To add schedule, click <a href="schedule.php">here</a></p>
+				<div id="logout">
+					<h2><a href = "welcome.php">Exit</a></h2>
+				</div>
+			<?php }else{?>
+				<div id="logout">
+				<h2><a href = "#">Exit</a></h2>
+				</div>
+			<?php } ?>
+
 		  </section>
 		</div>
 	</body>
