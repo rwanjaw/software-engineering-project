@@ -17,5 +17,4 @@ $conn=mysqli_connect($obj->host,$obj->username,$obj->password,$obj->db);
 if (mysqli_connect_errno($conn)) {
     die("Connection failed: " . $conn->connect_error);
 }
-session_start();
 ?>

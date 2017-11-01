@@ -1,0 +1,22 @@
+.hero {
+    background: url(../images/kyle-szegedi-8217.jpg) no-repeat center top;
+    opacity: 0.9;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    min-height: 0;
+    height: 550px;
+}
+.hero h1 {
+    margin-top: 0px;
+}
+.hero p {
+     color: #181818;
+     font-size: 25px;
+     font-weight: 600;
+     letter-spacing: 2px;
+     line-height: 24px;
+     margin-top: 10px;
+     margin-bottom: 80px;
+ }
