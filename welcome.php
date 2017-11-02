@@ -13,6 +13,9 @@
 
 $sql1 = "SELECT * FROM `bus`";
 $result1 = mysqli_query($conn,$sql1);
+
+$sql = "SELECT * FROM `schedule`";
+$result = mysqli_query($conn, $sql);
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -41,10 +44,10 @@ $result1 = mysqli_query($conn,$sql1);
 
 <body>
 <!-- header section -->
-<section class="hero" role="banner">
+<section class="hero" role="banner" style="height: 0px; min-height: 750px">
     <!--header navigation -->
-    <header id="header" style="margin">
-        <div class="header-content clearfix"> <a class="logo" href="#"><img src="images/icon.png" alt=""></a>
+    <header id="header" >
+        <div class="header-content clearfix"> <a class="logo" href="index.php"><img src="images/icon.png" alt=""></a>
             <nav class="navigation" role="navigation">
                 <ul class="primary-nav">
                     <a href="logout.php" class="btn btn-large">Logout</a>
@@ -57,25 +60,22 @@ $result1 = mysqli_query($conn,$sql1);
     <div class="container">
         <div class="col-md-10 col-md-offset-1">
             <div class="banner-text text-center">
-                <h1>Nganya</h1>
-                <p>Administrator Landing Page</p>
-                <nav role="navigation"> <a href="#operations" class="banner-btn"><img src="images/down-arrow.png" alt=""></a></nav>
+                <h1>Administrator Landing Page</h1>
             </div>
             <!-- banner text -->
         </div>
     </div>
-</section>
-<!-- header section -->
-<!-- Get a quote section -->
-<section id="operations" class="section quote" style="height: 350px; margin-top: 40px">
     <div class="container">
         <div class="col-md-8 col-md-offset-2 text-center">
             <h3>Please choose any of the following operations</h3>
-            <a class="btn btn-large" data-toggle="modal" data-target="#schedule">Create New Schedule</a>
-            <a href="viewschedule.php" class="btn btn-large">View Schedules</a>
-            <a class="btn btn-large" data-toggle="modal" data-target="#addBus">Add Buses</a> </div>
-    </div>
+            <a class="btn btn-large" data-toggle="modal" data-target="#schedule" style="margin: 10px">Create New Schedule</a>
+            <a class="btn btn-large" data-toggle="modal" data-target="#viewSchedule" style="margin: 10px">View Schedules</a>
+            <a class="btn btn-large" data-toggle="modal" data-target="#addBus" style="margin: 10px">Add Buses</a>
+            <a class="btn btn-large" data-toggle="modal" data-target="#deleteBus" style="margin: 10px">Delete Buses</a>
+            <a class="btn btn-large" data-toggle="modal" data-target="#editBus" style="margin: 10px">Edit Buses</a>
+        </div>
 </section>
+<!-- header section -->
 <form action="schedule.php" method="POST" role="form">
     <!-- Modal -->
     <div id="schedule" class="modal fade" role="dialog">
@@ -134,6 +134,126 @@ $result1 = mysqli_query($conn,$sql1);
 
 <form action="added.php" method="POST" role="form">
     <div id="addBus" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Register a Bus</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="destination">Bus Registration Number</label>
+                        <input type="text" class="form-control" id="txt1" name="number" placeholder="Registration Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Driver Name</label>
+                        <input type="text" class="form-control" name="driver" id="txt1"  placeholder="Driver's Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="depTime">Number of Seats</label>
+                        <input type="text" class="form-control" name="seats" id="txt1"  placeholder="Capacity">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-default" name="submit" id="btn" value="Add">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+<div id="viewSchedule" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width:1200px">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Registered Schedules</h4>
+            </div>
+            <div class="container">
+                <table class="table table-striped">
+                    <thead>
+                    <?php if (mysqli_num_rows($result) > 0) {?>
+                        <tr>
+                            <th>Schedule ID</th>
+                            <th>Destination</th>
+                            <th>Registration Name</th>
+                            <th>Date</th>
+                            <th>Depature Time</th>
+                            <th>Arrival Time</th>
+                            <th>Fare</th>
+                            <th>Number of Passengers</th>
+                        </tr>
+                        <?php
+                    }
+                    else {
+                        ?><h2><?php echo "0 results"; ?></h2><?php
+                    }
+                    ?>
+                    </thead>
+                    <tbody>
+                    <!--Use a while loop to make a table row for every DB row-->
+                    <?php
+                    while( $row = mysqli_fetch_assoc($result)){ ?>
+                        <tr>
+                            <!--Each table column is echoed in to a td cell-->
+                            <td><?php echo $row["Schedule_ID"]; ?></td>
+                            <td><?php echo $row["Destination"]; ?></td>
+                            <td><?php echo $row["Registration_No"]; ?></td>
+                            <td><?php echo $row["date"]; ?></td>
+                            <td><?php echo $row["depature_time"]; ?></td>
+                            <td><?php echo $row["arrival_time"]; ?></td>
+                            <td><?php echo $row["fare"]; ?></td>
+                            <td><?php echo $row["no_of_passengers"]; ?></td>
+                        </tr>
+                    <?php } ?>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<form action="deletebuses.php" method="POST" role="form">
+    <div id="deleteBus" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Bus</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="sel1">Select a bus</label>
+                        <select class="form-control" id="txt1" name="number">
+                            <option value="select" disabled="disabled" selected="selected">-- Choose the Bus --</option>
+                            <?php
+                            $bus = "SELECT * FROM `bus`";
+                            $res = mysqli_query($conn,$bus);
+                            while ($row1 = mysqli_fetch_array($res)) {
+                                echo "<option value='" . $row1['Registration_No'] ."'>" .$row1['Registration_No']."</option>";
+                            }?>
+                        </select>
+                    </div>
+                </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-default" name="submit" id="btn" value="Delete">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+</form>
+<form action="added.php" method="POST" role="form">
+    <div id="editBus" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
