@@ -16,6 +16,7 @@ $sql = "INSERT INTO `schedule` (`Schedule_ID`, `Destination`, `Registration_No`,
 
 if (mysqli_query($conn, $sql)) {
     $error= "New schedule added successfully";
+    header('Refresh:3; URL=welcome.php');
 } else {
     $error= "Error entering data: " . mysqli_error($conn);
 }

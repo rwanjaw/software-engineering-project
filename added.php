@@ -8,7 +8,6 @@ mysqli_query($conn,$insert) or die("Error: ".mysqli_error($conn));
 
 mysqli_close($conn);
 echo 'Succesfully added';
-sleep(5);
-header("welcome.php");
+header('Refresh:3; URL=welcome.php');
       
 ?>
