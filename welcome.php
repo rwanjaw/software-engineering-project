@@ -16,6 +16,9 @@ $result1 = mysqli_query($conn,$sql1);
 
 $sql = "SELECT * FROM `schedule`";
 $result = mysqli_query($conn, $sql);
+
+$sql2 = "SELECT * FROM `booking`";
+$result2 = mysqli_query($conn, $sql2);
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -69,6 +72,7 @@ $result = mysqli_query($conn, $sql);
         <div class="col-md-8 col-md-offset-2 text-center">
             <h3>Please choose any of the following operations</h3>
             <a class="btn btn-large" data-toggle="modal" data-target="#schedule" style="margin: 10px">Create New Schedule</a>
+            <a class="btn btn-large" data-toggle="modal" data-target="#viewBooking" style="margin: 10px">View Bookings</a>
             <a class="btn btn-large" data-toggle="modal" data-target="#viewSchedule" style="margin: 10px">View Schedules</a>
             <a class="btn btn-large" data-toggle="modal" data-target="#addBus" style="margin: 10px">Add Buses</a>
             <a class="btn btn-large" data-toggle="modal" data-target="#deleteBus" style="margin: 10px">Delete Buses</a>
@@ -209,6 +213,55 @@ $result = mysqli_query($conn, $sql);
                             <td><?php echo $row["arrival_time"]; ?></td>
                             <td><?php echo $row["fare"]; ?></td>
                             <td><?php echo $row["no_of_passengers"]; ?></td>
+                        </tr>
+                    <?php } ?>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="viewBooking" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width:1200px">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">List of Bookings Made</h4>
+            </div>
+            <div class="container">
+                <table class="table table-striped">
+                    <thead>
+                    <?php if (mysqli_num_rows($result2) > 0) {?>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Date</th>
+                            <th>Customer Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Schedule ID</th>
+                        </tr>
+                        <?php
+                    }
+                    else {
+                        ?><h2><?php echo "0 bookings"; ?></h2><?php
+                    }
+                    ?>
+                    </thead>
+                    <tbody>
+                    <!--Use a while loop to make a table row for every DB row-->
+                    <?php
+                    while( $row = mysqli_fetch_assoc($result2)){ ?>
+                        <tr>
+                            <!--Each table column is echoed in to a td cell-->
+                            <td><?php echo $row["Booking_ID"]; ?></td>
+                            <td><?php echo $row["bookingDate"]; ?></td>
+                            <td><?php echo $row["Customer_Name"]; ?></td>
+                            <td><?php echo $row["Email"]; ?></td>
+                            <td><?php echo $row["Phone"]; ?></td>
+                            <td><?php echo $row["Schedule_ID"]; ?></td>
                         </tr>
                     <?php } ?>
 
