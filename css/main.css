@@ -302,16 +302,16 @@ ul li {
 	-o-background-size: cover;
 	-webkit-background-size: cover;
 	background-size: cover;
-	min-height: 750px;
+	min-height: 300px;
 }
 .banner-btn {
 	opacity: 0.5;
 }
 .banner-text {
-	padding-top: 33%;
+	padding-top: 150px;
 }
 .banner-text h1 {
-	color: #fff;
+	color: #2FD54C;
 	font-family: "Source Sans Pro";
 	font-size: 53px;
 	letter-spacing: 24px;

@@ -12,7 +12,7 @@ if(isset($_POST['submit'])){
 	$fare=$_POST['fare'];
 	$noP=$_POST['NoP'];
 
-$sql = "INSERT INTO `schedule` (`Schedule_ID`, `Destination`, `Registration_No`, `date`, `depature_time`, `arrival_time`, `fare`, `no_of_passengers`) VALUES (NULL, '$destination', '$BusID', '$date', '$depaturetime', '$arrivaltime', '$fare', '$noP');";
+$sql = "INSERT INTO `schedule` (`Schedule_ID`, `Destination`, `Registration_No`, `date`, `depature_time`, `arrival_time`, `fare`, `no_of_passengers`,`seatsRemaining`) VALUES (NULL, '$destination', '$BusID', '$date', '$depaturetime', '$arrivaltime', '$fare', '$noP', '$noP');";
 
 if (mysqli_query($conn, $sql)) {
     $error= "New schedule added successfully";

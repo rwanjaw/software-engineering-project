@@ -1,37 +1,4 @@
-<html>
-<head>
-    <title>Index</title>
-    <link rel="stylesheet" type="text/css" href="customer.css"/>
-</head>
 
-<body>
-<div class="container">
-    <form id="contact" method="post" action="Customer.php">
-        <h3>Booking Form</h3>
-        <h4>Reserve your seat now</h4>
-        <fieldset>
-            <input name="fullname" placeholder="Your name" type="text" tabindex="1" required autofocus>
-        </fieldset>
-        <fieldset>
-            <input name="email" placeholder="Your Email Address" type="email" tabindex="2" required>
-        </fieldset>
-        <fieldset>
-            <input name="phoneNo" placeholder="Your Phone Number" type="tel" tabindex="3" required>
-        </fieldset>
-        <fieldset>
-            <select name="schedule">
-                <option value="select" disabled="disabled" selected="selected">-- Choose your Schedule --</option>
-                <option name="user_type" value="1">1</option>
-                <option name="user_type" value="2">2</option>
-            </select>
-        </fieldset>
-        <fieldset>
-            <button name="submit" type="submit"  id="contact-submit" data-submit="...Sending">Book</button>
-        </fieldset>
-    </form>
-</div>
-</body>
-</html>
 <?php
 /**
  * Created by PhpStorm.
@@ -45,8 +12,18 @@ $name = $_POST['fullname'];
 $email = $_POST['email'];
 $phoneNo = $_POST['phoneNo'];
 $email = $_POST['email'];
-$schedule = $_POST['schedule'];
-
-$sql = "INSERT INTO `booking`(`Booking_ID`, `Customer_Name`, `Email`, `Phone`, `Schedule_ID`) VALUES (NULL,'$name','$email','$phoneNo','$schedule')";
-$result = $conn->query($sql) or trigger_error($conn->error."[$sql]");
+$sID = $_POST['schedule'];
+$scheduleSql = "SELECT * FROM `schedule` WHERE `Schedule_ID` = '$sID'";
+$scheduleID = mysqli_query($conn,$scheduleSql) or trigger_error($conn->error."[$scheduleSql]");
+$row1 = mysqli_fetch_array($scheduleID);
+$s = $row1['Registration_No'];
+$remSeats = $row1['seatsRemaining'] - 1;
+$sql = "INSERT INTO `booking`(`Booking_ID`, `Customer_Name`, `Email`, `Phone`, `Schedule_ID`) VALUES (NULL,'$name','$email','$phoneNo','$sID')";
+$update = "UPDATE `schedule` SET `seatsRemaining` = '$remSeats' WHERE Schedule_ID = '$sID'";
+if (mysqli_query($conn, $sql) && mysqli_query($conn, $update)) {
+    echo "New booking added successfully";
+    header('Refresh:3; URL=index.php');
+} else {
+    echo "Error entering data: " .mysqli_error($conn) ;
+}
 ?>
